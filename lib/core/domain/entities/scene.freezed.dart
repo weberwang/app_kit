@@ -1,0 +1,314 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'scene.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$Scene {
+
+ String get id; String get name; String get deviceId; List<Layer> get layers; String? get screenshotPath;// 背景配置
+ BackgroundType get backgroundType; String get backgroundColor; List<String> get gradientColors; double get gradientAngle;// 设备框架距顶部偏移（0.0-1.0，相对画布高度），默认 0.10
+ double get deviceOffsetTop;
+/// Create a copy of Scene
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SceneCopyWith<Scene> get copyWith => _$SceneCopyWithImpl<Scene>(this as Scene, _$identity);
+
+  /// Serializes this Scene to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Scene&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&const DeepCollectionEquality().equals(other.layers, layers)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&(identical(other.backgroundType, backgroundType) || other.backgroundType == backgroundType)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&const DeepCollectionEquality().equals(other.gradientColors, gradientColors)&&(identical(other.gradientAngle, gradientAngle) || other.gradientAngle == gradientAngle)&&(identical(other.deviceOffsetTop, deviceOffsetTop) || other.deviceOffsetTop == deviceOffsetTop));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,deviceId,const DeepCollectionEquality().hash(layers),screenshotPath,backgroundType,backgroundColor,const DeepCollectionEquality().hash(gradientColors),gradientAngle,deviceOffsetTop);
+
+@override
+String toString() {
+  return 'Scene(id: $id, name: $name, deviceId: $deviceId, layers: $layers, screenshotPath: $screenshotPath, backgroundType: $backgroundType, backgroundColor: $backgroundColor, gradientColors: $gradientColors, gradientAngle: $gradientAngle, deviceOffsetTop: $deviceOffsetTop)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SceneCopyWith<$Res>  {
+  factory $SceneCopyWith(Scene value, $Res Function(Scene) _then) = _$SceneCopyWithImpl;
+@useResult
+$Res call({
+ String id, String name, String deviceId, List<Layer> layers, String? screenshotPath, BackgroundType backgroundType, String backgroundColor, List<String> gradientColors, double gradientAngle, double deviceOffsetTop
+});
+
+
+
+
+}
+/// @nodoc
+class _$SceneCopyWithImpl<$Res>
+    implements $SceneCopyWith<$Res> {
+  _$SceneCopyWithImpl(this._self, this._then);
+
+  final Scene _self;
+  final $Res Function(Scene) _then;
+
+/// Create a copy of Scene
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? deviceId = null,Object? layers = null,Object? screenshotPath = freezed,Object? backgroundType = null,Object? backgroundColor = null,Object? gradientColors = null,Object? gradientAngle = null,Object? deviceOffsetTop = null,}) {
+  return _then(_self.copyWith(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
+as String,layers: null == layers ? _self.layers : layers // ignore: cast_nullable_to_non_nullable
+as List<Layer>,screenshotPath: freezed == screenshotPath ? _self.screenshotPath : screenshotPath // ignore: cast_nullable_to_non_nullable
+as String?,backgroundType: null == backgroundType ? _self.backgroundType : backgroundType // ignore: cast_nullable_to_non_nullable
+as BackgroundType,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as String,gradientColors: null == gradientColors ? _self.gradientColors : gradientColors // ignore: cast_nullable_to_non_nullable
+as List<String>,gradientAngle: null == gradientAngle ? _self.gradientAngle : gradientAngle // ignore: cast_nullable_to_non_nullable
+as double,deviceOffsetTop: null == deviceOffsetTop ? _self.deviceOffsetTop : deviceOffsetTop // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Scene].
+extension ScenePatterns on Scene {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Scene value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Scene() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Scene value)  $default,){
+final _that = this;
+switch (_that) {
+case _Scene():
+return $default(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Scene value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Scene() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String deviceId,  List<Layer> layers,  String? screenshotPath,  BackgroundType backgroundType,  String backgroundColor,  List<String> gradientColors,  double gradientAngle,  double deviceOffsetTop)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Scene() when $default != null:
+return $default(_that.id,_that.name,_that.deviceId,_that.layers,_that.screenshotPath,_that.backgroundType,_that.backgroundColor,_that.gradientColors,_that.gradientAngle,_that.deviceOffsetTop);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String deviceId,  List<Layer> layers,  String? screenshotPath,  BackgroundType backgroundType,  String backgroundColor,  List<String> gradientColors,  double gradientAngle,  double deviceOffsetTop)  $default,) {final _that = this;
+switch (_that) {
+case _Scene():
+return $default(_that.id,_that.name,_that.deviceId,_that.layers,_that.screenshotPath,_that.backgroundType,_that.backgroundColor,_that.gradientColors,_that.gradientAngle,_that.deviceOffsetTop);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String deviceId,  List<Layer> layers,  String? screenshotPath,  BackgroundType backgroundType,  String backgroundColor,  List<String> gradientColors,  double gradientAngle,  double deviceOffsetTop)?  $default,) {final _that = this;
+switch (_that) {
+case _Scene() when $default != null:
+return $default(_that.id,_that.name,_that.deviceId,_that.layers,_that.screenshotPath,_that.backgroundType,_that.backgroundColor,_that.gradientColors,_that.gradientAngle,_that.deviceOffsetTop);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _Scene implements Scene {
+  const _Scene({required this.id, required this.name, required this.deviceId, final  List<Layer> layers = const [], this.screenshotPath, this.backgroundType = BackgroundType.solid, this.backgroundColor = '#FFFFFF', final  List<String> gradientColors = const ['#4A90D9', '#1A3C6E'], this.gradientAngle = 135.0, this.deviceOffsetTop = 0.10}): _layers = layers,_gradientColors = gradientColors;
+  factory _Scene.fromJson(Map<String, dynamic> json) => _$SceneFromJson(json);
+
+@override final  String id;
+@override final  String name;
+@override final  String deviceId;
+ final  List<Layer> _layers;
+@override@JsonKey() List<Layer> get layers {
+  if (_layers is EqualUnmodifiableListView) return _layers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_layers);
+}
+
+@override final  String? screenshotPath;
+// 背景配置
+@override@JsonKey() final  BackgroundType backgroundType;
+@override@JsonKey() final  String backgroundColor;
+ final  List<String> _gradientColors;
+@override@JsonKey() List<String> get gradientColors {
+  if (_gradientColors is EqualUnmodifiableListView) return _gradientColors;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_gradientColors);
+}
+
+@override@JsonKey() final  double gradientAngle;
+// 设备框架距顶部偏移（0.0-1.0，相对画布高度），默认 0.10
+@override@JsonKey() final  double deviceOffsetTop;
+
+/// Create a copy of Scene
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SceneCopyWith<_Scene> get copyWith => __$SceneCopyWithImpl<_Scene>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SceneToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Scene&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.deviceId, deviceId) || other.deviceId == deviceId)&&const DeepCollectionEquality().equals(other._layers, _layers)&&(identical(other.screenshotPath, screenshotPath) || other.screenshotPath == screenshotPath)&&(identical(other.backgroundType, backgroundType) || other.backgroundType == backgroundType)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&const DeepCollectionEquality().equals(other._gradientColors, _gradientColors)&&(identical(other.gradientAngle, gradientAngle) || other.gradientAngle == gradientAngle)&&(identical(other.deviceOffsetTop, deviceOffsetTop) || other.deviceOffsetTop == deviceOffsetTop));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,deviceId,const DeepCollectionEquality().hash(_layers),screenshotPath,backgroundType,backgroundColor,const DeepCollectionEquality().hash(_gradientColors),gradientAngle,deviceOffsetTop);
+
+@override
+String toString() {
+  return 'Scene(id: $id, name: $name, deviceId: $deviceId, layers: $layers, screenshotPath: $screenshotPath, backgroundType: $backgroundType, backgroundColor: $backgroundColor, gradientColors: $gradientColors, gradientAngle: $gradientAngle, deviceOffsetTop: $deviceOffsetTop)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SceneCopyWith<$Res> implements $SceneCopyWith<$Res> {
+  factory _$SceneCopyWith(_Scene value, $Res Function(_Scene) _then) = __$SceneCopyWithImpl;
+@override @useResult
+$Res call({
+ String id, String name, String deviceId, List<Layer> layers, String? screenshotPath, BackgroundType backgroundType, String backgroundColor, List<String> gradientColors, double gradientAngle, double deviceOffsetTop
+});
+
+
+
+
+}
+/// @nodoc
+class __$SceneCopyWithImpl<$Res>
+    implements _$SceneCopyWith<$Res> {
+  __$SceneCopyWithImpl(this._self, this._then);
+
+  final _Scene _self;
+  final $Res Function(_Scene) _then;
+
+/// Create a copy of Scene
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? deviceId = null,Object? layers = null,Object? screenshotPath = freezed,Object? backgroundType = null,Object? backgroundColor = null,Object? gradientColors = null,Object? gradientAngle = null,Object? deviceOffsetTop = null,}) {
+  return _then(_Scene(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,deviceId: null == deviceId ? _self.deviceId : deviceId // ignore: cast_nullable_to_non_nullable
+as String,layers: null == layers ? _self._layers : layers // ignore: cast_nullable_to_non_nullable
+as List<Layer>,screenshotPath: freezed == screenshotPath ? _self.screenshotPath : screenshotPath // ignore: cast_nullable_to_non_nullable
+as String?,backgroundType: null == backgroundType ? _self.backgroundType : backgroundType // ignore: cast_nullable_to_non_nullable
+as BackgroundType,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as String,gradientColors: null == gradientColors ? _self._gradientColors : gradientColors // ignore: cast_nullable_to_non_nullable
+as List<String>,gradientAngle: null == gradientAngle ? _self.gradientAngle : gradientAngle // ignore: cast_nullable_to_non_nullable
+as double,deviceOffsetTop: null == deviceOffsetTop ? _self.deviceOffsetTop : deviceOffsetTop // ignore: cast_nullable_to_non_nullable
+as double,
+  ));
+}
+
+
+}
+
+// dart format on
