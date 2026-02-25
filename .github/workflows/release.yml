@@ -1,5 +1,12 @@
 name: Release
 
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 # 推送 v* 格式的 tag 时触发（例如 v1.0.0）
 on:
   push:
@@ -11,6 +18,7 @@ jobs:
   build-windows:
     name: Build Windows
     runs-on: windows-latest
+    timeout-minutes: 40
 
     steps:
       - name: Checkout code
@@ -54,6 +62,7 @@ jobs:
   build-macos:
     name: Build macOS
     runs-on: macos-latest
+    timeout-minutes: 40
 
     steps:
       - name: Checkout code
@@ -100,6 +109,7 @@ jobs:
   create-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [build-windows, build-macos]
     permissions:
       contents: write
