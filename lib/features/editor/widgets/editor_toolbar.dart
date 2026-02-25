@@ -53,13 +53,13 @@ class EditorToolbar extends HookConsumerWidget {
           ),
           const Spacer(),
           // 撤销 / 重做
-          IconButton(
-            icon: const Icon(Icons.undo),
+          const IconButton(
+            icon: Icon(Icons.undo),
             tooltip: '撤销 (Ctrl+Z)',
             onPressed: null, // TODO: undo stack
           ),
-          IconButton(
-            icon: const Icon(Icons.redo),
+          const IconButton(
+            icon: Icon(Icons.redo),
             tooltip: '重做 (Ctrl+Y)',
             onPressed: null, // TODO: undo stack
           ),
@@ -375,11 +375,12 @@ class _ExportDialogState extends State<_ExportDialog> {
     final dir = await FilePicker.platform.getDirectoryPath(
       dialogTitle: '选择导出目录',
     );
-    if (dir != null)
+    if (dir != null) {
       setState(() {
         _outputDir = dir;
         _lastOutputDir = dir;
       });
+    }
   }
 
   @override
@@ -413,7 +414,7 @@ class _ExportDialogState extends State<_ExportDialog> {
             const SizedBox(height: 16),
             // 格式
             DropdownButtonFormField<ExportFormat>(
-              value: _format,
+              initialValue: _format,
               decoration: const InputDecoration(
                 labelText: '图片格式',
                 border: OutlineInputBorder(),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final class AppTheme {
   AppTheme._();
@@ -13,7 +12,6 @@ final class AppTheme {
       seedColor: _primaryColor,
       secondary: _secondaryColor,
     ),
-    textTheme: GoogleFonts.notoSansTextTheme(),
     appBarTheme: const AppBarTheme(
       surfaceTintColor: Colors.transparent,
       elevation: 0,
@@ -27,9 +25,6 @@ final class AppTheme {
       seedColor: _primaryColor,
       secondary: _secondaryColor,
       brightness: Brightness.dark,
-    ),
-    textTheme: GoogleFonts.notoSansTextTheme(
-      ThemeData(brightness: Brightness.dark).textTheme,
     ),
   );
 }

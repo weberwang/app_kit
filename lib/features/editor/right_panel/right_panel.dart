@@ -1,4 +1,4 @@
-﻿import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path/path.dart' as p;
@@ -143,7 +143,7 @@ class RightPanel extends HookConsumerWidget {
           // ── 文字图层属性（选中图层时内联展开）─────────────────
           if (selectedLayer != null &&
               selectedLayer.type == LayerType.text) ...[
-            SliverToBoxAdapter(child: _SectionHeader(title: '文字属性')),
+            const SliverToBoxAdapter(child: _SectionHeader(title: '文字属性')),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -156,7 +156,7 @@ class RightPanel extends HookConsumerWidget {
           const SliverToBoxAdapter(child: Divider(height: 16)),
 
           // ── 场景设置 ──────────────────────────────────────────
-          SliverToBoxAdapter(child: _SectionHeader(title: '场景')),
+          const SliverToBoxAdapter(child: _SectionHeader(title: '场景')),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -176,7 +176,7 @@ class RightPanel extends HookConsumerWidget {
           ),
 
           // ── 背景设置 ──────────────────────────────────────────
-          SliverToBoxAdapter(child: _SectionHeader(title: '背景')),
+          const SliverToBoxAdapter(child: _SectionHeader(title: '背景')),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -185,7 +185,7 @@ class RightPanel extends HookConsumerWidget {
           ),
 
           // ── 设备框架位置 ───────────────────────────────────────
-          SliverToBoxAdapter(child: _SectionHeader(title: '设备框架位置')),
+          const SliverToBoxAdapter(child: _SectionHeader(title: '设备框架位置')),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -214,7 +214,6 @@ class RightPanel extends HookConsumerWidget {
 // ─────────────────────────────────────────────────────────────────────────────
 class _LayerTile extends StatelessWidget {
   const _LayerTile({
-    super.key,
     required this.layer,
     required this.isSelected,
     required this.onTap,

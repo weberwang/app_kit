@@ -10,7 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:app_kit/core/domain/entities/layer.dart';
 import 'package:app_kit/core/domain/entities/scene.dart';
 import 'package:app_kit/features/editor/providers/editor_provider.dart';
-import 'package:app_kit/shared/constants/canvas_presets.dart';
 import 'package:app_kit/shared/constants/device_catalog.dart';
 
 /// 中央画布区域：显示设备框架 + 截图预览，支持拖入图片
@@ -109,7 +108,7 @@ class CanvasArea extends HookConsumerWidget {
     String? firstSceneId;
     for (final file in detail.files) {
       final lower = file.path.toLowerCase();
-      if (!imageExts.any((e) => lower.endsWith(e))) continue;
+      if (!imageExts.any(lower.endsWith)) continue;
       final id = ref
           .read(editorProjectProvider.notifier)
           .addScene(

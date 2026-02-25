@@ -24,32 +24,32 @@ class EditorPage extends HookConsumerWidget {
         const SingleActivator(LogicalKeyboardKey.keyS, control: true): () =>
             _quickSave(context, ref),
       },
-      child: Focus(
+      child: const Focus(
         autofocus: true,
         child: Scaffold(
           body: Column(
             children: [
-              const EditorToolbar(),
-              const Divider(height: 1),
+              EditorToolbar(),
+              Divider(height: 1),
               Expanded(
                 child: Row(
                   children: [
                     // ── Left panel: device list / scene list ─────────
                     SizedBox(
                       width: AppConstants.leftPanelWidth,
-                      child: const LeftPanel(),
+                      child: LeftPanel(),
                     ),
-                    const VerticalDivider(width: 1),
+                    VerticalDivider(width: 1),
 
                     // ── Center: canvas area ───────────────────────────
-                    const Expanded(child: CanvasArea()),
+                    Expanded(child: CanvasArea()),
 
-                    const VerticalDivider(width: 1),
+                    VerticalDivider(width: 1),
 
                     // ── Right panel: properties ───────────────────────
                     SizedBox(
                       width: AppConstants.rightPanelWidth,
-                      child: const RightPanel(),
+                      child: RightPanel(),
                     ),
                   ],
                 ),

@@ -22,8 +22,8 @@ class LeftPanel extends HookConsumerWidget {
         length: 2,
         child: Column(
           children: [
-            TabBar(
-              tabs: const [
+            const TabBar(
+              tabs: [
                 Tab(icon: Icon(Icons.phone_iphone), text: '设备'),
                 Tab(icon: Icon(Icons.photo_library), text: '场景'),
               ],
