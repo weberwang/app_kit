@@ -80,6 +80,7 @@ dev_dependencies:
   json_serializable: 6.11.2
   riverpod_generator: 3.0.3
   riverpod_lint: 3.0.3
+  msix: ^3.16.8
 
 
 # The following section is specific to Flutter packages.
@@ -121,3 +122,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+msix_config:
+  display_name: App Kit
+  publisher_display_name: Weber Wang
+  identity_name: com.weberwang.appkit
+  msix_version: 1.0.0.0
+  logo_path: windows/runner/resources/app_icon.ico
+  capabilities: internetClient

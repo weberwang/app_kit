@@ -32,20 +32,22 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Package into ZIP
+      - name: Create MSIX installer
         shell: pwsh
         run: |
+          dart pub global activate flutter_distributor
+          dart run msix:create --build-windows false
           $version = "${{ github.ref_name }}"
-          $outDir = "build\windows\x64\runner\Release"
-          $zipName = "app_kit-windows-${version}.zip"
-          Compress-Archive -Path "$outDir\*" -DestinationPath $zipName
-          echo "ZIP_NAME=$zipName" >> $env:GITHUB_ENV
+          $msixPath = Get-ChildItem -Path "build\windows\x64\runner\Release\*.msix" | Select-Object -First 1
+          $newName = "app_kit-windows-${version}.msix"
+          Copy-Item $msixPath.FullName -Destination $newName
+          echo "MSIX_NAME=$newName" >> $env:GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-release
-          path: ${{ env.ZIP_NAME }}
+          path: ${{ env.MSIX_NAME }}
           retention-days: 5
 
   # ─── macOS 构建 ─────────────────────────────────────────────────────────
@@ -73,19 +75,25 @@ jobs:
       - name: Build macOS release
         run: flutter build macos --release
 
-      - name: Package into ZIP
+      - name: Create DMG installer
         run: |
           VERSION="${{ github.ref_name }}"
           APP_PATH="build/macos/Build/Products/Release/app_kit.app"
-          ZIP_NAME="app_kit-macos-${VERSION}.zip"
-          ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_NAME"
-          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+          DMG_NAME="app_kit-macos-${VERSION}.dmg"
+          # 创建临时目录并复制 app
+          mkdir -p dmg_temp
+          cp -R "$APP_PATH" dmg_temp/
+          ln -s /Applications dmg_temp/Applications
+          # 创建 DMG
+          hdiutil create -volname "App Kit" -srcfolder dmg_temp -ov -format UDZO "$DMG_NAME"
+          rm -rf dmg_temp
+          echo "DMG_NAME=$DMG_NAME" >> $GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-release
-          path: ${{ env.ZIP_NAME }}
+          path: ${{ env.DMG_NAME }}
           retention-days: 5
 
   # ─── 创建 Release（两个平台构建完成后）────────────────────────────────────
