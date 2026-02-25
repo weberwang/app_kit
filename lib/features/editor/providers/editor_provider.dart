@@ -224,6 +224,29 @@ class EditorProject extends _$EditorProject {
         .toList();
     state = p.copyWith(localeGroups: groups, updatedAt: DateTime.now());
   }
+
+  /// 按比例缩放所有文字图层的字体大小（画布尺寸变化时调用）
+  void scaleFontSizes(double scaleRatio) {
+    final p = state;
+    if (p == null) return;
+    final groups = p.localeGroups
+        .map(
+          (g) => g.copyWith(
+            scenes: g.scenes.map((s) {
+              final scaledLayers = s.layers.map((layer) {
+                if (layer.type != LayerType.text) return layer;
+                final props = Map<String, dynamic>.from(layer.properties ?? {});
+                final oldSize = (props['fontSize'] as num?)?.toDouble() ?? 18.0;
+                props['fontSize'] = (oldSize * scaleRatio).clamp(8.0, 200.0);
+                return layer.copyWith(properties: props);
+              }).toList();
+              return s.copyWith(layers: scaledLayers);
+            }).toList(),
+          ),
+        )
+        .toList();
+    state = p.copyWith(localeGroups: groups, updatedAt: DateTime.now());
+  }
 }
 
 /// 当前选中的设备 ID
@@ -272,5 +295,13 @@ class ActiveCanvasPreset extends _$ActiveCanvasPreset {
   @override
   CanvasSizePreset build() => CanvasPresets.defaultPreset;
 
-  void select(CanvasSizePreset preset) => state = preset;
+  void select(CanvasSizePreset preset) {
+    final old = state;
+    if (old.id == preset.id) return;
+    // 计算缩放比例（基于宽度，因为文字通常横向排列）
+    final scaleRatio = preset.width / old.width;
+    state = preset;
+    // 按比例缩放所有文字图层的字体大小
+    ref.read(editorProjectProvider.notifier).scaleFontSizes(scaleRatio);
+  }
 }
