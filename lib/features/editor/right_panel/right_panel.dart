@@ -76,6 +76,31 @@ class RightPanel extends HookConsumerWidget {
           else
             SliverReorderableList(
               itemCount: layers.length,
+              proxyDecorator: (child, index, animation) {
+                final cs = Theme.of(context).colorScheme;
+                return AnimatedBuilder(
+                  animation: animation,
+                  builder: (context, _) {
+                    final t = Curves.easeOut.transform(animation.value);
+                    return Material(
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: cs.shadow.withValues(alpha: 0.18 * t),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: child,
+                      ),
+                    );
+                  },
+                );
+              },
               onReorder: (oldIdx, newIdx) {
                 final len = layers.length;
                 final realOld = len - 1 - oldIdx;
@@ -213,21 +238,24 @@ class _LayerTile extends StatelessWidget {
         ? (layer.properties?['text'] as String? ?? '文字')
         : layer.type.name;
 
-    return ListTile(
-      dense: true,
-      selected: isSelected,
-      selectedTileColor: cs.primaryContainer,
-      leading: Icon(icon, size: 18, color: isSelected ? cs.primary : null),
-      title: Text(
-        label,
-        style: const TextStyle(fontSize: 12),
-        overflow: TextOverflow.ellipsis,
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        dense: true,
+        selected: isSelected,
+        selectedTileColor: cs.primaryContainer,
+        leading: Icon(icon, size: 18, color: isSelected ? cs.primary : null),
+        title: Text(
+          label,
+          style: const TextStyle(fontSize: 12),
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete_outline, size: 16),
+          onPressed: onDelete,
+        ),
+        onTap: onTap,
       ),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete_outline, size: 16),
-        onPressed: onDelete,
-      ),
-      onTap: onTap,
     );
   }
 }

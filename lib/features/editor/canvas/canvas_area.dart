@@ -26,9 +26,9 @@ class CanvasArea extends HookConsumerWidget {
     return DropTarget(
       onDragEntered: (_) => isDragging.value = true,
       onDragExited: (_) => isDragging.value = false,
-      onDragDone: (detail) {
+      onDragDone: (detail) async {
         isDragging.value = false;
-        _onDropDone(ref, detail);
+        await _onDropDone(context, ref, detail);
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
@@ -84,9 +84,28 @@ class CanvasArea extends HookConsumerWidget {
     );
   }
 
-  void _onDropDone(WidgetRef ref, DropDoneDetails detail) {
+  Future<void> _onDropDone(
+    BuildContext context,
+    WidgetRef ref,
+    DropDoneDetails detail,
+  ) async {
     const imageExts = {'.png', '.jpg', '.jpeg', '.webp'};
     final deviceId = ref.read(selectedDeviceIdProvider);
+    final project = ref.read(editorProjectProvider);
+    if (project == null) return;
+
+    final existingLocales = project.localeGroups.map((g) => g.locale).toList();
+    var locale = _resolveDropLocale(ref);
+
+    if (!context.mounted) return;
+    final picked = await showDialog<String>(
+      context: context,
+      builder: (ctx) =>
+          _DropLocalePickerDialog(existing: existingLocales, initial: locale),
+    );
+    if (!context.mounted || picked == null) return;
+    locale = picked;
+
     String? firstSceneId;
     for (final file in detail.files) {
       final lower = file.path.toLowerCase();
@@ -94,7 +113,7 @@ class CanvasArea extends HookConsumerWidget {
       final id = ref
           .read(editorProjectProvider.notifier)
           .addScene(
-            locale: 'default',
+            locale: locale,
             screenshotPath: file.path,
             deviceId: deviceId,
           );
@@ -103,6 +122,111 @@ class CanvasArea extends HookConsumerWidget {
     if (firstSceneId != null) {
       ref.read(selectedSceneIdProvider.notifier).select(firstSceneId);
     }
+  }
+
+  String _resolveDropLocale(WidgetRef ref) {
+    final project = ref.read(editorProjectProvider);
+    final selectedSceneId = ref.read(selectedSceneIdProvider);
+    if (project == null) return 'default';
+
+    if (selectedSceneId != null) {
+      for (final group in project.localeGroups) {
+        if (group.scenes.any((s) => s.id == selectedSceneId)) {
+          return group.locale;
+        }
+      }
+    }
+
+    if (project.localeGroups.isNotEmpty) {
+      return project.localeGroups.first.locale;
+    }
+    return 'default';
+  }
+}
+
+class _DropLocalePickerDialog extends StatefulWidget {
+  const _DropLocalePickerDialog({
+    required this.existing,
+    required this.initial,
+  });
+
+  final List<String> existing;
+  final String initial;
+
+  @override
+  State<_DropLocalePickerDialog> createState() =>
+      _DropLocalePickerDialogState();
+}
+
+class _DropLocalePickerDialogState extends State<_DropLocalePickerDialog> {
+  late final TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.initial);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('选择语言'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (widget.existing.isNotEmpty) ...[
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: widget.existing
+                  .map(
+                    (locale) => ActionChip(
+                      label: Text(locale),
+                      onPressed: () => _ctrl.text = locale,
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              '或输入新语言代码：',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 4),
+          ],
+          TextField(
+            controller: _ctrl,
+            autofocus: widget.existing.isEmpty,
+            decoration: const InputDecoration(
+              hintText: 'zh, en, ja, ko…',
+              border: OutlineInputBorder(),
+              isDense: true,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('取消'),
+        ),
+        FilledButton(
+          onPressed: () {
+            final value = _ctrl.text.trim();
+            if (value.isNotEmpty) {
+              Navigator.of(context).pop(value);
+            }
+          },
+          child: const Text('确定'),
+        ),
+      ],
+    );
   }
 }
 

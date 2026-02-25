@@ -2,7 +2,7 @@ name: app_kit
 description: "App Store & Google Play screenshot generator. Supports multi-locale batch export and directory auto-fill."
 publish_to: 'none'
 
-version: 0.1.0+1
+version: 1.0.2+2602251
 
 environment:
   sdk: ^3.9.2

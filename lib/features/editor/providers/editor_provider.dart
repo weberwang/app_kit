@@ -59,7 +59,7 @@ class EditorProject extends _$EditorProject {
       id: _uuid.v4(),
       type: LayerType.text,
       x: 0.05,
-      y: 0.01, // 距顶部 4%
+      y: 0.04, // 距顶部 4%
       width: 0.90,
       height: 0.10,
       properties: {
@@ -81,7 +81,7 @@ class EditorProject extends _$EditorProject {
       height: 0.08,
       properties: {
         'text': '副标题描述文字',
-        'fontSize': 16.0,
+        'fontSize': 24.0,
         'fontFamily': 'Noto Sans SC',
         'color': '#4A4A6A',
         'bold': false,

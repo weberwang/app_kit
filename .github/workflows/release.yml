@@ -40,22 +40,20 @@ jobs:
       - name: Build Windows release
         run: flutter build windows --release
 
-      - name: Create MSIX installer
+      - name: Package Windows release as ZIP
         shell: pwsh
         run: |
-          dart pub global activate flutter_distributor
-          dart run msix:create --build-windows false
           $version = "${{ github.ref_name }}"
-          $msixPath = Get-ChildItem -Path "build\windows\x64\runner\Release\*.msix" | Select-Object -First 1
-          $newName = "app_kit-windows-${version}.msix"
-          Copy-Item $msixPath.FullName -Destination $newName
-          echo "MSIX_NAME=$newName" >> $env:GITHUB_ENV
+          $outDir = "build\windows\x64\runner\Release"
+          $zipName = "app_kit-windows-${version}.zip"
+          Compress-Archive -Path "$outDir\*" -DestinationPath $zipName
+          echo "WINDOWS_PACKAGE_NAME=$zipName" >> $env:GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-release
-          path: ${{ env.MSIX_NAME }}
+          path: ${{ env.WINDOWS_PACKAGE_NAME }}
           retention-days: 5
 
   # ─── macOS 构建 ─────────────────────────────────────────────────────────
